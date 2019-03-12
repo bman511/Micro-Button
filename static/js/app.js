@@ -42,9 +42,9 @@ function buildCharts(sample) {
     let indexVals = sampleData.sample_values.map((item,index) => [item,index]);
 
     let topTen = indexVals.sort((a,b) => b[0] - a[0]).slice(0,10);
-
+    
     let finalVals = topTen.map(x => x[0]);
-      
+  
     let finalIds = topTen.map(x => sampleData.otu_ids[x[1]]);
       
     let finalLabels = topTen.map(x => sampleData.otu_labels[x[1]]);
@@ -60,17 +60,42 @@ function buildCharts(sample) {
 
       height: 400,
       width: 300
-    }
+    };
 
     Plotly.newPlot('pie',data,layout);
 
+    let sortIDs = sampleData.otu_ids.map((item,index) => [item,index]).sort((a,b) => b[0] - a[0]);
+    
+    let sortVals = sortIDs.map(id => sampleData.sample_values[id[1]]);
+
+    var bubble = {
+      x: sortIDs.map(x => x[0]),
+      y: sortVals,
+      mode: 'markers',
+      marker: {
+        size: sortVals,
+        //color: sortIDs.map(x => x[0]), //this.x
+        color: this.x,
+        colorscale: 'Viridis'
+      },
+      text: sortIDs.map(id => sampleData.otu_labels[id[1]])
+    };
+    
+    let bubData = [bubble];
+    
+    let bubLayout = {
+      title: 'Belly Micro Bubble',
+      showlegend: false,
+      height: 600,
+      width: 600
+    };
+    
+    Plotly.newPlot('bubble', bubData, bubLayout);
 
   });
     // @TODO: Build a Bubble Chart using the sample data
 
-    // @TODO: Build a Pie Chart
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // otu_ids, and labels (10 each).
+
 }
 
 function init() {
