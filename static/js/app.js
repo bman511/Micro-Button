@@ -11,12 +11,12 @@ function buildMetadata(sample) {
     metaData = d3.select("#sample-metadata");
     // Use `.html("") to clear any existing metadata
     metaData.html("");
-    let metaList = metaData.append("ul");
+    let metaList = metaData.append("div");
     // Use `Object.entries` to add each key and value pair to the panel
     for(const [key,value] of Object.entries(metaInfo)){
 
-      let metaItem = metaList.append("li");
-      metaItem.text(key + "-" + value);
+      let metaItem = metaList.append("p");
+      metaItem.text(key + ": " + value);
     }
     // Hint: Inside the loop, you will need to use d3 to append new
     // tags for each key-value in the metadata.
@@ -58,24 +58,26 @@ function buildCharts(sample) {
 
     let layout = {
 
+      title:'Top Ten Samples',
       height: 400,
-      width: 300
+      width: 600
     };
 
     Plotly.newPlot('pie',data,layout);
 
     let sortIDs = sampleData.otu_ids.map((item,index) => [item,index]).sort((a,b) => b[0] - a[0]);
     
+    let IDsOnly = sortIDs.map(x => x[0]);
+
     let sortVals = sortIDs.map(id => sampleData.sample_values[id[1]]);
 
-    var bubble = {
-      x: sortIDs.map(x => x[0]),
+    let bubble = {
+      x: IDsOnly,
       y: sortVals,
       mode: 'markers',
       marker: {
         size: sortVals,
-        //color: sortIDs.map(x => x[0]), //this.x
-        color: this.x,
+        color: IDsOnly,
         colorscale: 'Viridis'
       },
       text: sortIDs.map(id => sampleData.otu_labels[id[1]])
@@ -87,7 +89,7 @@ function buildCharts(sample) {
       title: 'Belly Micro Bubble',
       showlegend: false,
       height: 600,
-      width: 600
+      width: 1100
     };
     
     Plotly.newPlot('bubble', bubData, bubLayout);
