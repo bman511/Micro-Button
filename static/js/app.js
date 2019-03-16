@@ -49,17 +49,22 @@ function buildCharts(sample) {
       
     let finalLabels = topTen.map(x => sampleData.otu_labels[x[1]]);
     
+    let pieColors = ['rgb(44, 62, 80)', 'rgb(59, 83, 107)', 'rgb(231, 76, 60)', '#B83C30', '#262626','#3498DB','#3BADFA','#2980B9','#226A99','#63658F'];
+
     let data = [{
       values: finalVals,
       labels: finalIds,
       type: 'pie',
+      marker: {
+        colors:pieColors
+      },
       hovertext: finalLabels
     }];
 
     let layout = {
 
-      title:'Top Ten Samples',
-      height: 400,
+      title:'Top Ten Samples per Person',
+      height: 600,
       width: 600
     };
 
@@ -86,7 +91,7 @@ function buildCharts(sample) {
     let bubData = [bubble];
     
     let bubLayout = {
-      title: 'Belly Micro Bubble',
+      title: 'Bugs in Bubbles',
       showlegend: false,
       height: 600,
       width: 1100

@@ -1,10 +1,53 @@
 
+:root {
+     --text-color: rgb(68, 114, 134); 
+  }
+
 .jumbotron{
 
-    color:rebeccapurple;
+    color:white;
+    background: url(https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.publishyourarticles.net%2Fwp-content%2Fuploads%2F2015%2F06%2FExploding-Bacteria.jpg&f=1) bottom center no-repeat;
+    background-size: 100%;
+    border-bottom:30px solid #5288A0;
 }
+
+h1{
+
+    font-size:5em;
+}
+
+.jumbotron>p{
+
+    font-size:1.5em;
+}
+
 
 .card{
 
     margin-top:1em;
+    color:var(--text-color);
+    /* min-width: 158px; */
+    box-shadow: 1px 1px 1px 1px #c2c0c0;
+    
 }
+
+#meta-title{
+
+    border-bottom:1px solid;
+    border-bottom-color: var(--text-color);
+}
+
+.col-md-2{
+
+    min-width: 170px;
+}
+
+h5,h3{
+
+    text-align: center;
+}
+
+/* Background image address */
+/* https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.publishyourarticles.net%2Fwp-content%2Fuploads%2F2015%2F06%2FExploding-Bacteria.jpg&f=1 */
+
+/* #5288A0 */
